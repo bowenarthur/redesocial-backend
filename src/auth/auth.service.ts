@@ -3,7 +3,6 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '../interfaces/user.interface';
-import { jwtConstants } from './constants';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -44,7 +43,7 @@ export class AuthService {
   }
 
   private generateToken(payload) {
-    return jwt.sign(payload, jwtConstants.secret, {
+    return jwt.sign(payload, process.env.JWT_HASH, {
       expiresIn: 3600,
     });
   }

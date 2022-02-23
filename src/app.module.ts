@@ -10,9 +10,10 @@ import { PostService } from './posts/post.service';
 import { PostController } from './posts/post.controller';
 import { postProviders } from './posts/post.providers';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, ConfigModule.forRoot()],
   controllers: [PostController, AppController, AuthController],
   providers: [
     PostService,
