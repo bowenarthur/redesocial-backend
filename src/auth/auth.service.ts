@@ -3,6 +3,7 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '../interfaces/user.interface';
+import { jwtConstants } from './constants';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -27,10 +28,10 @@ export class AuthService {
       }
       await bcrypt.compare(password, user.password, (err, result) => {
         if (!err && result) {
-          //params to be forwarded through token
-          const params = { id: user._id, name: user.name };
+          //payload to be forwarded through token
+          const payload = { id: user._id, name: user.name };
           return res.status(200).send({
-            token: this.generateToken(params),
+            token: this.generateToken(payload),
             name: user.name,
           });
         } else {
@@ -42,8 +43,8 @@ export class AuthService {
     }
   }
 
-  private generateToken(params) {
-    return jwt.sign(params, 'qwertyuiop', {
+  private generateToken(payload) {
+    return jwt.sign(payload, jwtConstants.secret, {
       expiresIn: 3600,
     });
   }

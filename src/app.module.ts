@@ -6,11 +6,20 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { userProviders } from './auth/user.providers';
-import { AuthenticateMiddleware } from './middleware/authenticate.middleware';
+import { PostService } from './posts/post.service';
+import { PostController } from './posts/post.controller';
+import { postProviders } from './posts/post.providers';
+import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, AuthenticateMiddleware, ...userProviders],
+  controllers: [PostController, AppController, AuthController],
+  providers: [
+    PostService,
+    AppService,
+    AuthService,
+    JwtStrategy,
+    ...userProviders, ...postProviders
+  ],
 })
 export class AppModule {}
