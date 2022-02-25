@@ -20,13 +20,13 @@ export class PostController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put()
+  @Put(':id')
   updatePost(@Req() req, @Res() res) {
     return this.postService.updatePost(req, res);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete()
+  @Delete(':id')
   deletePost(@Req() req, @Res() res) {
     return this.postService.deletePost(req, res);
   }

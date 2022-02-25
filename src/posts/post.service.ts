@@ -2,15 +2,12 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { Post } from '../interfaces/post.interface';
-import { User } from '../interfaces/user.interface';
 
 @Injectable()
 export class PostService {
   constructor(
     @Inject('POST_MODEL')
-    private postModel: Model<Post>,
-    @Inject('USER_MODEL')
-    private userModel: Model<User>,
+    private postModel: Model<Post>
   ) {}
 
   async getPosts(req, res) {
@@ -46,7 +43,6 @@ export class PostService {
     } catch (error) {
       return res.status(400).send(error);
     }
-    return res.status(200).send('ok');
   }
 
   async createPost(req, res) {
@@ -56,7 +52,7 @@ export class PostService {
     try {
       const id = req.user.id;
       await this.postModel.create({ ...req.body, user: id });
-      return res.status(200).send('Post created');
+      return res.status(200).send({'message':'Post created'});
     } catch (error) {
       return res.status(400).send(error);
     }
@@ -68,7 +64,7 @@ export class PostService {
     }
     try {
       await this.postModel.findByIdAndUpdate(req.query.id, req.body);
-      return res.status(200).send('Post updated');
+      return res.status(200).send({'message':'Post updated'});
     } catch (error) {
       return res.status(400).send(error);
     }
@@ -77,7 +73,7 @@ export class PostService {
   async deletePost(req, res) {
     try {
       await this.postModel.findByIdAndDelete(req.query.id);
-      return res.status(200).send('Post deleted');
+      return res.status(200).send({'message':'Post deleted'});
     } catch (error) {
       return res.status(400).send(error);
     }

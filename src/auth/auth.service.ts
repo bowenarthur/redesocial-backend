@@ -3,6 +3,7 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '../interfaces/user.interface';
+import { JwtStrategy } from './jwt.strategy';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -11,6 +12,7 @@ export class AuthService {
   constructor(
     @Inject('USER_MODEL')
     private userModel: Model<User>,
+    private jwtstrategy: JwtStrategy
   ) {}
 
   async login(req, res) {
