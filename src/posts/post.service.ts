@@ -72,7 +72,7 @@ export class PostService {
 
   async deletePost(req, res) {
     try {
-      await this.postModel.findByIdAndDelete(req.query.id);
+      await this.postModel.findByIdAndDelete(req.params.id);
       return res.status(200).send({'message':'Post deleted'});
     } catch (error) {
       return res.status(400).send(error);
