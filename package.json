@@ -27,15 +27,20 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.0.0",
+    "aws-sdk": "^2.1088.0",
     "bcrypt": "^5.0.1",
+    "crypto": "^1.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.3",
+    "multer": "^1.4.4",
+    "multer-s3": "^2.10.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
